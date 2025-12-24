@@ -32,8 +32,8 @@ namespace GestionScolarite.UnitTests.ControlLayer
             controller.ListerProfesseurs();
 
             // Assert
-            // Vérifier que la vue a reçu les données
-            Assert.AreEqual(3, professeurView.ListeAffichée.Count);
+            // CORRECTION : Utiliser HasCount au lieu de AreEqual pour les collections
+            Assert.HasCount(3, professeurView.ListeAffichée);
 
             // Vérifier les données du premier professeur
             var premierProfesseur = professeurView.ListeAffichée[0];
@@ -88,7 +88,8 @@ namespace GestionScolarite.UnitTests.ControlLayer
             controller.ListerProfesseurs();
 
             // Assert
-            Assert.AreEqual(0, professeurView.ListeAffichée.Count);
+            // CORRECTION : Utiliser HasCount pour vérifier une liste vide
+            Assert.HasCount(0, professeurView.ListeAffichée);
             mockProfesseurDAO.Verify(dao => dao.GetAll(), Times.Once());
         }
 
@@ -112,7 +113,8 @@ namespace GestionScolarite.UnitTests.ControlLayer
             controller.ListerProfesseurs();
 
             // Assert - Vérifier l'intégration complète
-            Assert.AreEqual(2, professeurView.ListeAffichée.Count);
+            // CORRECTION : Utiliser HasCount
+            Assert.HasCount(2, professeurView.ListeAffichée);
 
             // Vérifier l'ordre et toutes les propriétés
             Assert.AreEqual(10, professeurView.ListeAffichée[0].id);
